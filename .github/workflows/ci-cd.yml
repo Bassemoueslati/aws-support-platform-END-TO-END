@@ -1,0 +1,39 @@
+name: CI-CD
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -r backend/fastapi-api/requirements.txt
+
+      - name: Syntax check
+        run: |
+          python -m py_compile backend/fastapi-api/main.py
+
+      - name: Build Docker images
+        run: |
+          docker build -f docker/Dockerfile.backend -t aws-supportdesk-backend:ci .
+          docker build -f docker/Dockerfile.frontend -t aws-supportdesk-frontend:ci .
+
+  cd:
+    if: github.ref == 'refs/heads/main'
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy placeholder
+        run: echo "Add terraform apply and kubectl apply commands here"
