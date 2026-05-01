@@ -1,30 +1,45 @@
-# AWS SupportDesk Starter
+# InsightOps | Enterprise Support Dashboard
 
-Projet DevOps/Cloud simple pour un profil junior.
+InsightOps is a premium support ticket management platform with a sophisticated, light-themed dashboard design. It combines Django's robustness with a state-of-the-art React interface.
 
-## Type de projet
-Plateforme de gestion de tickets support (Support Ticket Management).
+## 📊 Architecture Diagram
 
-## Stack
-- Backend: Python FastAPI
-- Frontend: React (simple page)
-- Containers: Docker + Docker Compose
-- Cloud IaC: Terraform AWS (simple: VPC + EKS + EC2)
-- Config: Ansible
-- Monitoring: Prometheus + Grafana
-- CI/CD: GitHub Actions
-
-## Lancer en local
-```bash
-docker compose up --build
+```mermaid
+graph LR
+    Customer((Customer)) -->|Public Portal| React[React App]
+    Agent((Support Agent)) -->|Private Dashboard| React
+    
+    subgraph "Backend System"
+        React -->|JWT Auth| Django[Django Backend]
+        Django -->|SQLAlchemy| DB[(PostgreSQL)]
+    end
+    
+    subgraph "CI/CD & Infra"
+        Jenkins((Jenkins)) -->|CI/CD| Docker[Docker Containers]
+        Docker -->|Deploy| K8s[AWS EKS]
+    end
 ```
 
-## Lancer monitoring
-```bash
-docker compose -f docker-compose.yml -f docker-compose.monitoring.yml up --build
-```
+## 🚀 Key Features
+- **Elite Dashboard UI**: Modeled after top-tier enterprise SaaS platforms.
+- **Bi-Portal Access**: Dedicated views for customers (public) and agents (private).
+- **JWT Authentication**: Full security for internal ticket management.
+- **Stats & Analytics**: Real-time visualization of ticket usage and staff alerts.
+- **Django Backend**: Scalable, secure API with PostgreSQL persistence.
 
-- Frontend: http://localhost:3000
-- Backend: http://localhost:8000/health
-- Prometheus: http://localhost:9090
-- Grafana: http://localhost:3001
+## 📦 Tech Stack
+- **Frontend**: React (Vite), TailwindCSS, Lucide Icons
+- **Backend**: Django REST Framework, SimpleJWT
+- **Database**: PostgreSQL
+- **Infrastructure**: Docker, Jenkins, Terraform, Kubernetes (AWS)
+
+## 🛠 Getting Started
+
+1. **Launch Stack**:
+   ```bash
+   docker-compose up --build
+   ```
+2. **Access**:
+   - Dashboard: `http://localhost:3000`
+   - Customer Portal: `http://localhost:3000/customer`
+   - Django API: `http://localhost:8000/api`
