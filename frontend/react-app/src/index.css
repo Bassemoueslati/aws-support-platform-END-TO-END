@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f5f6fa;
+  --sidebar-bg: #ffffff;
+  --primary: #4379ee;
+  --text-dark: #202224;
+  --text-light: #5a5c5e;
+  --border: #e9e9e9;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-dark);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.sidebar-item {
+  @apply flex items-center gap-4 px-6 py-3.5 rounded-lg transition-all text-sm font-semibold;
+  color: var(--text-light);
+}
+
+.sidebar-item.active {
+  @apply bg-[#4379ee] text-white shadow-lg shadow-blue-500/20;
+}
+
+.card {
+  @apply bg-white p-6 rounded-xl border border-[#e9e9e9];
+}
+
+.btn-blue {
+  @apply bg-[#4379ee] text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-600 transition-all;
+}
+
+.btn-outline {
+  @apply border border-[#4379ee] text-[#4379ee] px-6 py-2 rounded-lg font-bold hover:bg-blue-50 transition-all;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
